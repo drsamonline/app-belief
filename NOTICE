@@ -1,0 +1,26 @@
+NOTICE
+======
+
+Belief — https://github.com/drsamonline/app-belief
+Copyright 2026 Dr Sohil Momin. Licensed under PolyForm Noncommercial 1.0.0 (see LICENSE).
+
+Third-party components
+----------------------
+
+None. Belief has no third-party dependency and no CDN.
+
+Vendored from this project's own kits (same licence, same author), copied verbatim
+on 25/11/2026:
+
+- web-kit 0.1.0 — docs/play/web-kit.js — the offline shell, storage helpers and PWA registration
+- export-kit 1.0.0 — docs/play/export-kit.js — Blob download, used to write the exports
+
+Neither kit is modified. Neither makes a network request.
+
+A note on the demonstrations
+----------------------------
+
+Every result in this app is computed from the reader's own answers. No population
+statistic, study finding or prevalence figure appears anywhere in it, and the app says
+so under each result. The mechanisms are described, not cited: citing a number nobody
+in this repository measured would be worse than describing the mechanism without one.

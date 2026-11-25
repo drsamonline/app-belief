@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belief — the mechanism, working on you</title>
+<meta name="description" content="Six interactive demonstrations of how belief works — anchoring, availability, confirmation, repetition, escalation, propaganda technique — and a map of how a story mutated as it was shared. Offline, on device.">
+<meta name="theme-color" content="#101418">
+<style>
+  :root{--bg:#f6f5f2;--panel:#fff;--ink:#14181d;--muted:#5d666f;--line:#d9d6cf;--accent:#3d4b8a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  main{max-width:780px;margin:0 auto;padding:48px 20px 64px}
+  h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
+  .lede{font-size:18px;color:var(--muted);margin:0 0 26px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:9px}
+  .status{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:9px;background:var(--panel);font-size:14px}
+  .status b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  h2{font-size:17px;margin:30px 0 8px}
+  ul{padding-left:20px}li{margin:4px 0}
+  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#eeede9;padding:1px 5px;border-radius:4px}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+  th,td{text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Belief</h1>
+  <p class="lede">Six mechanisms, six demonstrations, and a map of how a story mutated as it was shared.
+  Each demonstration asks you something first and only then shows a result — because the only way the
+  lesson lands is if the mechanism works on you, once, in front of you.</p>
+
+  <a class="cta" href="play/index.html">Open Belief</a>
+
+  <div class="status">
+    <b>Status</b>
+    Built and working offline: six demonstrations (anchoring, availability, confirmation bias, illusory
+    truth, escalation of commitment, propaganda technique), each refused until its last step is answered;
+    notes filed by chapter or under “unsorted”; progress that marks an unplayed demonstration as unplayed;
+    and a rumor map that diffs versions against each other.
+    <br><b>Not built</b>: a packaged Windows EXE / Android APK release (see the README), and any population
+    statistic — this app shows your answers, not other people's.
+  </div>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Puts you inside each mechanism: your own estimate, your own picks, your own ratings, your own path through a scenario.</li>
+    <li>Shows the result <em>computed from what you typed</em>, quoting the answer it used and naming the mechanism.</li>
+    <li>Marks a demonstration you have not played as <strong>unplayed</strong> — never as complete.</li>
+    <li>Files a note under the mechanism it belongs to; a note with no chapter goes to “unsorted” and says so.</li>
+    <li>Maps a story's mutation: paste versions with a source and a date, and see what appeared, what disappeared, which hedges were added and which numbers were dropped.</li>
+  </ul>
+
+  <h2>What it will not do</h2>
+  <ul>
+    <li><strong>Tell you what to believe</strong>, or mock anyone who believes something. It explains the mechanism and lets you recognise it.</li>
+    <li><strong>Invent evidence.</strong> There is no “70% of people…” anywhere: the only numbers are yours, and the app says so under each result.</li>
+    <li><strong>Decide which version of a story is true.</strong> The map shows movement; truth needs the primary source.</li>
+    <li><strong>Show a result before you answer.</strong> Every demonstration refuses until its last step is in.</li>
+    <li><strong>Upload anything.</strong> No network at runtime; CSP <code>connect-src 'none'</code>.</li>
+  </ul>
+
+  <h2>When things go wrong</h2>
+  <table>
+    <tr><th>Case</th><th>What happens</th></tr>
+    <tr><td>Bad input</td><td>A note with no chapter is filed under “unsorted” and says so. A story version with no source or no date is refused, because a mutation with no provenance cannot be placed on a map.</td></tr>
+    <tr><td>No network</td><td>Nothing changes: the demonstrations, the notes and the map are on the device.</td></tr>
+    <tr><td>Storage full or unavailable</td><td>Progress and notes are not written and the app says the session will not be remembered; reading and playing continue.</td></tr>
+    <tr><td>Corrupt saved state</td><td>Unreadable progress is reported and offered for export, with an explicit “start from the beginning” — never a silent reset. An unreadable map is never rebuilt from a partial read, because a wrong chain is worse than no chain.</td></tr>
+  </table>
+
+  <h2>How to run it</h2>
+  <ul>
+    <li><strong>Here</strong>: <a href="play/index.html">play/index.html</a>, or install it from your browser's menu.</li>
+    <li><strong>Offline file</strong>: open <code>docs/play/index.html</code> straight from disk.</li>
+    <li><strong>Tests</strong>: <code>node tests/self-tests.js</code> — the spec's countable “done means” is asserted there, one demonstration at a time.</li>
+  </ul>
+
+  <footer>
+    PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin ·
+    <a href="https://github.com/drsamonline/app-belief">source</a>
+  </footer>
+</main>
+</body>
+</html>

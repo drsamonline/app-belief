@@ -1,0 +1,15 @@
+{
+  "name": "Belief — the mechanism, working on you",
+  "short_name": "Belief",
+  "description": "Six interactive demonstrations of how belief works, and a map of how a story mutated as it was shared. Offline, on device.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f2",
+  "theme_color": "#101418",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
