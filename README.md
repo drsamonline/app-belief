@@ -15,7 +15,8 @@ the only way the lesson lands is if the mechanism works on you, once, in front o
 | | |
 |---|---|
 | **Built** | Six mechanisms each with one demonstration (anchoring, availability, confirmation bias, illusory truth, escalation of commitment, propaganda technique); a result refused until every step is answered, then quoting the answer given; progress that marks unplayed as unplayed; notes filed by chapter or `unsorted`; a rumor map that diffs consecutive versions, counts hedges added and numbers dropped, refuses a version with no source or date, and keeps identical versions as repeats. |
-| **Not built** | A packaged Windows EXE / Android APK release (`app-builder` is not reachable here). Any population statistic — deliberately, see below. |
+| **Release** | Windows EXE, Android APK and Linux binary, built from this source by `app-builder` in CI, attached to the rolling release: [app-latest](https://github.com/drsamonline/app-belief/releases/tag/app-latest) |
+| **Not built** | Any population statistic — deliberately, see below. |
 | **Untested** | Dragging files (there is no file input in this app), the service worker and install prompt (jsdom implements neither), and how the demonstrations feel on a real phone — the copy is written for a screen, not measured against readers. |
 
 ## The spec's "done means", made countable
@@ -111,6 +112,3 @@ PAGES.json                 landing = docs/index.html, app = docs/play/index.html
 
 ## What is not built, and why
 
-**The packaged release.** The definition of done asks for a release with the EXE and APK that
-`app-builder` produces from the same source. `app-builder` was not reachable from the environment
-this was built in, so no release exists and none is claimed.
