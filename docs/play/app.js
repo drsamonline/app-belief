@@ -59,10 +59,19 @@
     return n;
   }
 
+  /* store() used to swallow the failure entirely: every handler printed a cheerful line whether or not
+   * anything was written. It now reports the failure itself, and okStatus() refuses to overwrite it. */
+  var lastStoreFailed = false;
   function store(key, value) {
-    try { window.localStorage.setItem(key, value); return { ok: true }; }
-    catch (e) { return { ok: false, reason: e && e.name === "QuotaExceededError" ? "storage is full" : "storage is unavailable" }; }
+    try { window.localStorage.setItem(key, value); lastStoreFailed = false; return { ok: true }; }
+    catch (e) {
+      lastStoreFailed = true;
+      var why = e && e.name === "QuotaExceededError" ? "storage is full" : "storage is unavailable";
+      setStatus("bad", "NOT SAVED: " + why + ". What is on screen will not survive a reload.");
+      return { ok: false, reason: why };
+    }
   }
+  function okStatus(message) { if (!lastStoreFailed) setStatus("ok", message); }
   function load(key) {
     try { return { ok: true, value: window.localStorage.getItem(key) }; }
     catch (e) { return { ok: false, value: null }; }
@@ -305,9 +314,10 @@
     if (!res.ok) { setStatus("bad", res.reason); return; }
     state.notes.push(res.note);
     els.noteText.value = "";
-    persistProgress();
+    var kept = persistProgress();
     renderNotes();
-    setStatus(res.note_about_unsorted ? "warn" : "ok", res.says);
+    /* a note that could not be written is not "filed": persistProgress has already said what went wrong */
+    if (kept) setStatus(res.note_about_unsorted ? "warn" : "ok", res.says);
   }
 
   function renderNotes() {
@@ -388,7 +398,7 @@
     if (out.ok) {
       var where = what === "map" ? els.mapNote : els.exportNote;
       where.textContent = "Wrote " + out.filename + " (" + out.bytes + " bytes).";
-      setStatus("ok", "Wrote " + out.filename + ".");
+      okStatus("Wrote " + out.filename + ".");
     } else {
       setStatus("bad", out.reason + ".");
     }
@@ -439,8 +449,11 @@
     });
     state.versions.push(c.version);
     renderMap();
-    store(K_MAP, B.serializeMap(state.versions));
-    setStatus("ok", "Example loaded: an invented story, three versions. The third is word-for-word the second — it is kept and marked a repeat, not merged.");
+    /* store() returns {ok, reason} and reports nothing itself, so the example used to say "loaded" even
+     * when nothing was written */
+    var kept = store(K_MAP, B.serializeMap(state.versions));
+    if (kept.ok) okStatus("Example loaded: an invented story, three versions. The third is word-for-word the second — it is kept and marked a repeat, not merged.");
+    else setStatus("bad", "NOT SAVED: " + kept.reason + ". The example is on screen but will not survive a reload.");
   });
 
   /* ------------------------------------------------------------ start up */
@@ -463,7 +476,7 @@
         state.notes = [];
         renderMechList();
         renderNotes();
-        setStatus("ok", "Starting from the beginning, deliberately. The unreadable file is gone.");
+        okStatus("Starting from the beginning, deliberately. The unreadable file is gone.");
       });
       els.exportNote.parentNode.insertBefore(restart, els.exportNote);
     }
@@ -483,7 +496,7 @@
         drop(K_MAP);
         state.versions = [];
         renderMap();
-        setStatus("ok", "The map was cleared. A chain was not rebuilt from the partial read.");
+        okStatus("The map was cleared. A chain was not rebuilt from the partial read.");
       });
       els.mapNote.parentNode.insertBefore(clearMap, els.mapNote);
     }
