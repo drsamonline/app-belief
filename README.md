@@ -9,6 +9,7 @@ the only way the lesson lands is if the mechanism works on you, once, in front o
 - **Plan row:** #3 of 37 in `drsamonline/forge` → `QUEUE/PLAN.json`
 - **Specs absorbed:** `app-belief-lab` (lead), `app-rumor-map`
 - **Licence:** PolyForm Noncommercial 1.0.0
+- **Sponsor:** [github.com/sponsors/drsamonline](https://github.com/sponsors/drsamonline) — free, offline, no account
 
 ## Status
 
