@@ -1,96 +1,97 @@
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Belief — the mechanism, working on you</title>
-<meta name="description" content="Six interactive demonstrations of how belief works — anchoring, availability, confirmation, repetition, escalation, propaganda technique — and a map of how a story mutated as it was shared. Offline, on device.">
-<meta name="theme-color" content="#101418">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belief — a story and its versions</title>
+<meta name="description" content="Where a claim came from, and which versions of it are word-for-word the same.">
+<meta name="theme-color" content="#f2f0e9">
 <style>
-  :root{--bg:#f6f5f2;--panel:#fff;--ink:#14181d;--muted:#5d666f;--line:#d9d6cf;--accent:#3d4b8a}
+  :root{--bg:#f2f0e9;--panel:#fdfcf7;--ink:#1e2124;--rule:#dcd8cb;--grey:#68655c;--ink2:#3d4a5c;--repeat:#9a5a34;--new:#3f6b52;
+        --sans:"Segoe UI",system-ui,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;
+        --s0:clamp(11px,.4vw + 10px,12.5px);--s1:clamp(14px,.55vw + 12px,16.5px);--s2:clamp(18px,1.2vw + 14px,25px);
+        --display:clamp(28px,5.2vw,60px);--gut:clamp(16px,3.4vw,58px)}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
-  main{max-width:780px;margin:0 auto;padding:48px 20px 64px}
-  h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
-  .lede{font-size:18px;color:var(--muted);margin:0 0 26px}
-  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:9px}
-  .status{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:9px;background:var(--panel);font-size:14px}
-  .status b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
-  h2{font-size:17px;margin:30px 0 8px}
-  ul{padding-left:20px}li{margin:4px 0}
-  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#eeede9;padding:1px 5px;border-radius:4px}
-  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
-  th,td{text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
-  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
-  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-  a{color:var(--accent)}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  .map{max-width:1660px;margin:0 auto;padding:0 0 58px}
+  .bar{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:10px var(--gut);border-bottom:1px solid var(--rule);
+       font-family:var(--mono);font-size:var(--s0);letter-spacing:.15em;text-transform:uppercase;color:var(--grey)}
+  .bar b{color:var(--ink2);font-weight:400}
+  .head{display:grid;gap:clamp(14px,2.2vw,36px);padding:clamp(22px,3.2vw,50px) var(--gut) clamp(14px,2vw,26px);grid-template-columns:1fr}
+  @media (min-width:960px){.head{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:end}}
+  h1{font-size:var(--display);line-height:1;margin:0;letter-spacing:-.03em;font-weight:700}
+  .head p{margin:10px 0 0;font-size:var(--s2);line-height:1.42;color:var(--grey);max-width:44ch}
+  .key{border:1px solid var(--rule);background:var(--panel);padding:12px 14px;font-family:var(--mono);font-size:var(--s0);color:var(--grey);line-height:1.8}
+  .key b{display:block;color:var(--ink2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+  .key i{display:inline-block;width:9px;height:9px;margin-right:6px;vertical-align:middle}
+  /* the version track: a spine with cards hanging off it, 1 col phone -> 3 wide */
+  .track{display:grid;gap:clamp(10px,1.4vw,20px);padding:0 var(--gut) clamp(16px,2vw,26px);grid-template-columns:1fr}
+  @media (min-width:700px){.track{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1200px){.track{grid-template-columns:repeat(3,1fr)}}
+  .v{background:var(--panel);border:1px solid var(--rule);border-left:4px solid var(--new);padding:clamp(12px,1.5vw,18px);position:relative}
+  .v.repeat{border-left-color:var(--repeat);background:#fbf6f1}
+  .v .d{font-family:var(--mono);font-size:var(--s0);color:var(--grey);letter-spacing:.06em}
+  .v .src{font-size:var(--s1);font-weight:600;margin-top:4px}
+  .v .txt{font-size:var(--s1);line-height:1.6;margin-top:7px;color:#3c3a34}
+  .v .flag{font-family:var(--mono);font-size:calc(var(--s0) - .5px);letter-spacing:.1em;text-transform:uppercase;
+           color:var(--repeat);margin-top:8px}
+  .v.repeat .flag::before{content:"⟳ "}
+  .same{margin:0 var(--gut);border:1px dashed var(--repeat);background:#fbf6f1;padding:12px 14px;font-size:var(--s1);line-height:1.7;color:#5d3a25}
+  .cols{display:grid;gap:clamp(18px,2.6vw,46px);padding:clamp(18px,2.6vw,36px) var(--gut) 0;grid-template-columns:1fr}
+  @media (min-width:860px){.cols{grid-template-columns:repeat(2,1fr)}}
+  @media (min-width:1380px){.cols{grid-template-columns:repeat(3,1fr)}}
+  h2{font-family:var(--mono);font-size:var(--s0);letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:0 0 6px}
+  p{font-size:var(--s1);line-height:1.72;margin:0 0 12px}
+  .go{display:inline-block;background:var(--ink2);color:#fff;text-decoration:none;padding:12px 22px;border-radius:4px;
+      font-family:var(--mono);font-size:var(--s0);letter-spacing:.15em;text-transform:uppercase;margin-top:6px}
+  .go:hover{background:var(--ink)}
+  .sponsor{margin:clamp(22px,3vw,38px) var(--gut) 0;border:1px solid var(--rule);border-left:3px solid #c9a05a;background:var(--panel);
+           border-radius:8px;padding:12px 14px;font-size:var(--s0);color:var(--grey);line-height:1.6}
+  .sponsor a{color:var(--repeat);text-decoration:none;border-bottom:1px solid currentColor}
+  .foot{margin:14px var(--gut) 0;font-family:var(--mono);font-size:var(--s0);color:#8b8578;line-height:1.8}
+  .foot a{color:var(--ink2)}
+</style></head>
+<body><div class="map">
+  <div class="bar"><span>one story · three versions</span><span><b>1</b> repeat · <b>2</b> distinct</span></div>
 
-  .sponsor{margin:24px 0 0;padding:12px 14px;border:1px solid rgba(128,128,128,.35);border-left:3px solid #c9a05a;
-           background:rgba(128,128,128,.07);border-radius:8px;font-size:12.5px;line-height:1.6}
-  .sponsor a{color:#c9a05a;text-decoration:none;border-bottom:1px solid currentColor}
-</style>
-</head>
-<body>
-<main>
-  <h1>Belief</h1>
-  <p class="lede">Six mechanisms, six demonstrations, and a map of how a story mutated as it was shared.
-  Each demonstration asks you something first and only then shows a result — because the only way the
-  lesson lands is if the mechanism works on you, once, in front of you.</p>
+  <div class="head">
+    <div>
+      <h1>Belief</h1>
+      <p>Where a claim came from — and which versions of it are word-for-word the same as another.</p>
+    </div>
+    <div class="key"><b>reading the track</b>
+      <i style="background:#3f6b52"></i>a version that says something new<br>
+      <i style="background:#9a5a34"></i>a repeat: same words, different source
+    </div>
+  </div>
 
-  <a class="cta" href="play/index.html">Open Belief</a>
+  <div class="track">
+    <div class="v"><div class="d">03/05/2026</div><div class="src">colony office notice</div><div class="txt">The tank was cleaned on 3 May. Testing found normal chlorine levels.</div></div>
+    <div class="v"><div class="d">12/05/2026</div><div class="src">WhatsApp forward</div><div class="txt">The tank was reportedly not cleaned in May. Some say the office never confirmed anything.</div></div>
+    <div class="v repeat"><div class="d">14/05/2026</div><div class="src">another forward</div><div class="txt">The tank was reportedly not cleaned in May. Some say the office never confirmed anything.</div><div class="flag">same words as 12/05 · kept, marked, not merged</div></div>
+  </div>
 
-  <div class="status">
-    <b>Status</b>
-    Built and working offline: six demonstrations (anchoring, availability, confirmation bias, illusory
-    truth, escalation of commitment, propaganda technique), each refused until its last step is answered;
-    notes filed by chapter or under “unsorted”; progress that marks an unplayed demonstration as unplayed;
-    and a rumor map that diffs versions against each other.
-    <br><b>Not built</b>: any population
-    statistic — this app shows your answers, not other people's.
-  <br><b>Release</b>: Windows EXE, Android APK and Linux binary, built from this source in CI — <a href="https://github.com/drsamonline/app-belief/releases/tag/app-latest">app-latest</a>.</div>
+  <div class="same">Two sources, one wording. The second forward is not a second source — it is the same sentence arriving twice, and the app keeps both so you can see that.</div>
 
-  <h2>What it does</h2>
-  <ul>
-    <li>Puts you inside each mechanism: your own estimate, your own picks, your own ratings, your own path through a scenario.</li>
-    <li>Shows the result <em>computed from what you typed</em>, quoting the answer it used and naming the mechanism.</li>
-    <li>Marks a demonstration you have not played as <strong>unplayed</strong> — never as complete.</li>
-    <li>Files a note under the mechanism it belongs to; a note with no chapter goes to “unsorted” and says so.</li>
-    <li>Maps a story's mutation: paste versions with a source and a date, and see what appeared, what disappeared, which hedges were added and which numbers were dropped.</li>
-  </ul>
+  <div class="cols">
+    <div>
+      <h2>Kept, not merged</h2>
+      <p>A repeat is marked and kept. Merging two identical versions would hide the fact that they travelled separately — which is the whole question.</p>
+    </div>
+    <div>
+      <h2>What it refuses</h2>
+      <p>It will not decide what is true. It shows you the versions, who said them and when, and which are the same words.</p>
+    </div>
+    <div>
+      <h2>Get it</h2>
+      <p>Offline, on your device, no account.</p>
+      <a class="go" href="play/index.html">open the track →</a>
+    </div>
+  </div>
 
-  <h2>What it will not do</h2>
-  <ul>
-    <li><strong>Tell you what to believe</strong>, or mock anyone who believes something. It explains the mechanism and lets you recognise it.</li>
-    <li><strong>Invent evidence.</strong> There is no “70% of people…” anywhere: the only numbers are yours, and the app says so under each result.</li>
-    <li><strong>Decide which version of a story is true.</strong> The map shows movement; truth needs the primary source.</li>
-    <li><strong>Show a result before you answer.</strong> Every demonstration refuses until its last step is in.</li>
-    <li><strong>Upload anything.</strong> No network at runtime; CSP <code>connect-src 'none'</code>.</li>
-  </ul>
-
-  <h2>When things go wrong</h2>
-  <table>
-    <tr><th>Case</th><th>What happens</th></tr>
-    <tr><td>Bad input</td><td>A note with no chapter is filed under “unsorted” and says so. A story version with no source or no date is refused, because a mutation with no provenance cannot be placed on a map.</td></tr>
-    <tr><td>No network</td><td>Nothing changes: the demonstrations, the notes and the map are on the device.</td></tr>
-    <tr><td>Storage full or unavailable</td><td>Progress and notes are not written and the app says the session will not be remembered; reading and playing continue.</td></tr>
-    <tr><td>Corrupt saved state</td><td>Unreadable progress is reported and offered for export, with an explicit “start from the beginning” — never a silent reset. An unreadable map is never rebuilt from a partial read, because a wrong chain is worse than no chain.</td></tr>
-  </table>
-
-  <h2>How to run it</h2>
-  <ul>
-    <li><strong>Here</strong>: <a href="play/index.html">play/index.html</a>, or install it from your browser's menu.</li>
-    <li><strong>Offline file</strong>: open <code>docs/play/index.html</code> straight from disk.</li>
-    <li><strong>Tests</strong>: <code>node tests/self-tests.js</code> — the spec's countable “done means” is asserted there, one demonstration at a time.</li>
-  </ul>
-
-    <div class="sponsor">
+  <div class="sponsor">
     <strong>Sponsor this app.</strong> It is free, offline and has no account. If it earned its keep:
     <a href="https://github.com/sponsors/drsamonline">github.com/sponsors/drsamonline</a>
   </div>
-<footer>
-    PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin ·
-    <a href="https://github.com/drsamonline/app-belief">source</a>
-  </footer>
-</main>
-</body>
-</html>
+  <p class="foot">Windows · Android · Linux at <a href="https://github.com/drsamonline/app-belief/releases/tag/app-latest">app-latest</a> ·
+  PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin</p>
+</div></body></html>
